@@ -1,0 +1,1 @@
+javac -d ./out src/SwitchState.java src/Sensor.java src/MagneticSensor.java src/Main.java
