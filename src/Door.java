@@ -24,6 +24,9 @@ public class Door {
         else
             return 0;
     }
+    public MagneticSensor getSensor(){
+        return this.magneticSensor;
+    }
 
     private final MagneticSensor magneticSensor;
     private State state;
