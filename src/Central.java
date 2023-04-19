@@ -19,7 +19,13 @@ public class Central {
         zone0.add(s);
     }
     public void checkZone(){
-        ...
+        for (Sensor sensor : zone0) {
+            if (sensor.getState() == SwitchState.OPEN) {
+                this.disarm();
+                System.out.print("Hay sensores abiertos en esta zona");
+                break;
+            }
+        }
     }
     public String getHeader(){
         return "Central";

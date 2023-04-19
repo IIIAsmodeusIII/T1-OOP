@@ -25,7 +25,7 @@ public class Door {
             return 0;
     }
 
-    private final MagneticSensor magneticSensor;
+    final MagneticSensor magneticSensor;
     private State state;
     private final int id;
     private static int nextId;

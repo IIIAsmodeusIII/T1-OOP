@@ -16,13 +16,13 @@ public class Stage2 {
         for (int i = 0; i < numDoors; i++) {
             Door d = new Door();
             doors.add(d);
-            central....
+            central.addNewSensor(d.magneticSensor);
         }
         int numWindows = in.nextInt();
         for (int i = 0; i < numWindows; i++) {
             Window w = new Window();
             windows.add(w);
-            central....
+            central.addNewSensor(w.magneticSensor);
         }
         in.nextLine();
         String soundFile = in.next();
@@ -41,21 +41,36 @@ public class Stage2 {
             command = in.next();
             if (command.charAt(0)=='x') break;
             switch (command.charAt(0)) {
-                case 'd':
+                case 'd' -> {
                     i = Integer.parseInt(command.substring(1));
                     parameter = in.next().charAt(0);
-                    if (parameter== 'o')
+                    if (parameter == 'o')
                         doors.get(i).open();
                     else
                         doors.get(i).close();
-                    break;
-                case 'w':
-                    ...                    break;
-                case 'k':
+                }
+                case 'w' -> {
+                    i = Integer.parseInt(command.substring(1));
+                    parameter = in.next().charAt(0);
+                    if (parameter == 'o')
+                        windows.get(i).open();
+                    else
+                        windows.get(i).close();
+                }
+                case 'k' -> {
                     parameter = in.next().charAt(0);
                     switch (parameter) {
-                        ...
+                        case 'a':
+                            central.arm();
+                            break;
+                        case 'p':
+                            central.arm();
+                            break;
+                        case 'd':
+                            central.disarm();
+                            break;
                     }
+                }
             }
             central.checkZone();
         }
