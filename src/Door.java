@@ -28,7 +28,7 @@ public class Door {
         return this.magneticSensor;
     }
 
-    private final MagneticSensor magneticSensor;
+    final MagneticSensor magneticSensor;
     private State state;
     private final int id;
     private static int nextId;

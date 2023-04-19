@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Central {
     public Central(ArrayList<Door> doors, ArrayList<Window> windows){
-        zone0 = new ArrayList<Sensor>();
-        zone1 = new ArrayList<Sensor>();
+        zone0 = new ArrayList<>();
+        zone1 = new ArrayList<>();
         zone0_state = true;
         zone1_state = true;
         flag = true;
@@ -22,18 +23,18 @@ public class Central {
         }
         else {
             checkZone();
-            if (flag == true) {
+            if (flag) {
                 isArmed = true;
                 System.out.println("Armado exitoso!");
             } else {
                 System.out.print("Zonas abiertas: ");
-                if (zone0_state == false) {
+                if (!zone0_state) {
                     System.out.print("Zona 0 ");
                 }
-                if (zone1_state == false) {
+                if (!zone1_state) {
                     System.out.print("Zona 1 ");
                 }
-                System.out.println("");
+                System.out.println("\n");
             }
         }
     }
@@ -44,13 +45,13 @@ public class Central {
         siren = s;
     }
     public boolean checkZone(){
-        if(zone0.get(0).toString() == "0"){
+        if(Objects.equals(zone0.get(0).toString(), "0")){
             zone0_state = false;
             flag = false;
             return false;
         }
         for (int i = 1; i < zone1.size(); i++){
-            if(zone1.get(i).toString() == "0"){
+            if(Objects.equals(zone1.get(i).toString(), "0")){
                 zone1_state = false;
                 flag = false;
                 return false;
@@ -63,7 +64,7 @@ public class Central {
         return "Central";
     }
     public boolean getState(){
-        return isArmed?true:false;
+        return isArmed;
     }
     private ArrayList<Sensor> zone0;
     private ArrayList<Sensor> zone1;
