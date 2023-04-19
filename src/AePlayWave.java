@@ -5,7 +5,6 @@
  * Hello Sansano(a), you do not need to understand this class, just use it.
  */
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
