@@ -50,7 +50,7 @@ public class Central {
             flag = false;
             return false;
         }
-        for (int i = 1; i < zone1.size(); i++){
+        for (int i = 0; i < zone1.size(); i++){
             if(Objects.equals(zone1.get(i).toString(), "0")){
                 zone1_state = false;
                 flag = false;
