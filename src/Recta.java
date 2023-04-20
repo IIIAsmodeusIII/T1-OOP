@@ -13,8 +13,9 @@ public class Recta {
         this.m = Math.tan(m);
         this.b = y - (m * x);
     }
-
+    public double get_m() {return this.m;}
     public boolean Eval(float x, float y){
+        //Punto esta encima de la recta si mx+b < y
         return m * x + b < y;
     }
 }
