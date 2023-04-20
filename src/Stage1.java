@@ -38,7 +38,7 @@ public class Stage1 {
         // Menu
         int step = 0;
         try {
-            File file = new File("src/output.csv");
+            File file = new File("output.csv");
             FileWriter out = new FileWriter(file);
             makeHeaderInCsvFile(out);
 
@@ -73,10 +73,6 @@ public class Stage1 {
 
     public void executeUserCommand(Matcher matcher){
         if (matcher.find()) {
-            System.out.println(matcher.group(0));
-            System.out.println(matcher.group(1));
-            System.out.println(matcher.group(2));
-            System.out.println(matcher.group(3));
 
             switch (matcher.group(1)) {
                 case "d" -> {
@@ -135,7 +131,7 @@ public class Stage1 {
     }
     public static void main(String [] args) throws IOException {
 
-        Scanner in = new Scanner(new File("src/config.txt"));
+        Scanner in = new Scanner(new File(args[0]));
         //System.out.println("File: " + args[0]);
 
         Stage1 stage = new Stage1();
