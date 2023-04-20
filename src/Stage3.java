@@ -9,16 +9,20 @@ import java.io.IOException;
 public class Stage3 {
     private ArrayList<Door> doors;
     private ArrayList<Window> windows;
+    private ArrayList<PIR_Detector> pirs;
+    private ArrayList<Person> people;
     private Central central;
     private Siren siren;
     // Pattern Regex
     Pattern pattern;
     Matcher matcher;
     public Stage3() {
-        doors = new ArrayList<>();
+        doors   = new ArrayList<>();
         windows = new ArrayList<>();
+        pirs    = new ArrayList<>();
+        people  = new ArrayList<>();
 
-        pattern = Pattern.compile("([kdwcp])(\\d?)\\s(.*)");
+        pattern = Pattern.compile("([kdwcpD])(\\d?)\\s(.*)");
     }
     public void readConfiguration(Scanner in){
 
@@ -41,6 +45,8 @@ public class Stage3 {
             angle           = in.nextInt();
             sensingAngle    = in.nextInt();
             sensingDistance = in.nextInt();
+
+            pirs.add(new PIR_Detector(x, y, angle, sensingAngle, sensingDistance));
         }
 
         // Sound file
@@ -138,6 +144,24 @@ public class Stage3 {
                 }
                 case "k" -> {
                     central.arm(matcher.group(3));
+                }
+                case "c" -> {
+                    float x = Float.parseFloat(matcher.group(3).split(" ")[0]);
+                    float y = Float.parseFloat(matcher.group(3).split(" ")[1]);
+                    System.out.println(x);
+                    System.out.println(y);
+                    people.add(new Person(x, y));
+                }
+                case "p" -> {
+                    people.get(Integer.parseInt((matcher.group(2)))).move(matcher.group(3));
+                }
+                case "D" -> {
+                    System.out.println("[DEBUG] People");
+                    for (int i=0; i<people.size(); i++){
+                        System.out.println(people.get(i).getX());
+                        System.out.println(people.get(i).getY());
+                        System.out.println("\n");
+                    }
                 }
             }
         }else{

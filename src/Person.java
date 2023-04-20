@@ -14,10 +14,10 @@ public class Person {
                 x += 0.5;
             }
             case "u" -> {
-                y -= 0.5;
+                y += 0.5;
             }
             case "d" -> {
-                y += 0.5;
+                y -= 0.5;
             }
         }
     }
