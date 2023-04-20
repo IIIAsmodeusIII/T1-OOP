@@ -1,9 +1,9 @@
 public class Person {
-    float x;
-    float y;
+    private float x;
+    private float y;
     public Person(float x, float y){
-        x = x;
-        y = y;
+        this.x = x;
+        this.y = y;
     }
     public void move(String direction){
         switch (direction){

@@ -5,8 +5,10 @@ public class Central {
     public Central(ArrayList<Door> doors, ArrayList<Window> windows){
         zone0 = new ArrayList<>();
         zone1 = new ArrayList<>();
+        zone2 = new ArrayList<>();
         zone0_state = true;
         zone1_state = true;
+        zone2_state = true;
         flag = true;
         isArmed = false;
         siren = null;
@@ -37,6 +39,9 @@ public class Central {
                 if (!zone1_state) {
                     System.out.print("Zona 1 ");
                 }
+                if (!zone2_state) {
+                    System.out.print("Zona 2 ");
+                }
                 System.out.println("\n");
             }
         }
@@ -60,6 +65,13 @@ public class Central {
                 return false;
             }
         }
+        for (int i = 0; i < zone2.size(); i++){
+            if(Objects.equals(zone2.get(i).toString(), "0")){
+                zone2_state = false;
+                flag = false;
+                return false;
+            }
+        }
         flag = true;
         return true;
     }
@@ -69,11 +81,17 @@ public class Central {
     public boolean getState(){
         return isArmed;
     }
+
+    public Siren getSiren(){
+        return this.siren;
+    }
     private ArrayList<Sensor> zone0;
     private ArrayList<Sensor> zone1;
+    private ArrayList<Sensor> zone2;
     private boolean isArmed;
     private boolean zone0_state;
     private boolean zone1_state;
+    private boolean zone2_state;
     private boolean flag;
     private Siren siren;
 }
