@@ -7,6 +7,8 @@ public class PIR_Detector extends Sensor{
         this.sensing_angle = sensing_angle;
         this.sensing_range = sensing_range;
         this.rectaSup = new Recta(false, x, y, direction_angle, sensing_angle);
+        this.rectaInf = new Recta(true, x, y, direction_angle, sensing_angle);
+        this.circulo = new Circulo(sensing_range);
     }{
         id = nextId++;
     }
@@ -15,8 +17,8 @@ public class PIR_Detector extends Sensor{
         return "Pir"+id;
     }
 
-    public boolean f(float x, float y){
-
+    public boolean detectarPunto(float x, float y){
+        return (rectaSup.Eval(x, y) != rectaInf.Eval(x, y)) && circulo.Eval(this.x, this.y, x, y);
     }
 
     private Recta rectaSup;
@@ -26,6 +28,8 @@ public class PIR_Detector extends Sensor{
     private int direction_angle;
     private int sensing_angle;
     private int sensing_range;
+
+    private Circulo circulo;
     private final int id;
     private static int nextId;
     static {

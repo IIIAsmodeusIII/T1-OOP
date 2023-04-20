@@ -15,10 +15,6 @@ public class Recta {
     }
 
     public boolean Eval(float x, float y){
-        if (m * x + b < y) {
-            
-        } else {
-            
-        }
+        return m * x + b < y;
     }
 }
