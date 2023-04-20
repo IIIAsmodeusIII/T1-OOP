@@ -62,7 +62,7 @@ public class Stage3 {
         in.close();
 
         central = new Central(doors, windows, pirs);
-        siren   = new Siren("src/" + sound_file);
+        siren   = new Siren(sound_file);
 
         central.setSiren((siren));
     }
@@ -72,7 +72,7 @@ public class Stage3 {
         boolean sirenShouldSound = false;
 
         try {
-            File file = new File("src/output.csv");
+            File file = new File("output.csv");
             FileWriter out = new FileWriter(file);
             makeHeaderInCsvFile(out);
 
@@ -221,7 +221,7 @@ public class Stage3 {
     }
     public static void main(String [] args) throws IOException {
 
-        Scanner in = new Scanner(new File("src/config.txt"));
+        Scanner in = new Scanner(new File(args[0]));
         //System.out.println("File: " + args[0]);
 
         Stage3 stage = new Stage3();
