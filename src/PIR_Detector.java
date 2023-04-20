@@ -6,24 +6,21 @@ public class PIR_Detector extends Sensor{
         this.direction_angle = direction_angle;
         this.sensing_angle = sensing_angle;
         this.sensing_range = sensing_range;
+        this.rectaSup = new Recta(false, x, y, direction_angle, sensing_angle);
     }{
         id = nextId++;
     }
-
-    public int getDirectionAngle(){ return direction_angle; }
-
-    public int getSensingAngle(){ return sensing_angle; }
     
-    public int getSensingRange(){ return sensing_range; }
-    
-    public float[] getPosition() {
-        float[] array = {x, y};
-        return array;
-
-    }public String getHeader(){
+    public String getHeader(){
         return "Pir"+id;
     }
 
+    public boolean f(float x, float y){
+
+    }
+
+    private Recta rectaSup;
+    private Recta rectaInf;
     private float x;
     private float y;
     private int direction_angle;
