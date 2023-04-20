@@ -24,6 +24,11 @@ public class Window {
         else
             return 0;
     }
+
+    public MagneticSensor getSensor(){
+        return this.magneticSensor;
+    }
+
     public final MagneticSensor magneticSensor;
     private State state;
     private final int id;

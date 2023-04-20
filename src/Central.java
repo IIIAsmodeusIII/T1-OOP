@@ -16,6 +16,9 @@ public class Central {
         for (int i = 1; i < doors.size(); i++){
             zone1.add(doors.get(i).getSensor());
         }
+        for (int i = 0; i < windows.size(); i++){
+            zone1.add(windows.get(i).getSensor());
+        }
     }
     public void arm(String param) {
         if (param.equals("d")){
