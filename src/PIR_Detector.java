@@ -11,7 +11,7 @@ public class PIR_Detector extends Sensor{
         this.rectaSup = new Recta(false, x, y, direction_angle, sensing_angle);
         this.rectaInf = new Recta(true, x, y, direction_angle, sensing_angle);
         this.circulo = new Circulo(sensing_range);
-        this.Cuadrantes_cono();
+        this.cuadrantes = Cuadrantes_cono();
     }{
         id = nextId++;
     }
@@ -25,14 +25,14 @@ public class PIR_Detector extends Sensor{
         return (rectaSup.Eval(x, y) != rectaInf.Eval(x, y)) && circulo.Eval(this.x, this.y, x, y) && in_cuadrante(x, y);
     }
 
-    public void Cuadrantes_cono(){
+    public ArrayList<Integer> Cuadrantes_cono(){
         int alfa = direction_angle+(sensing_angle/2);
         int beta = direction_angle-(sensing_angle/2);
         if (alfa >= 0 && alfa <= 90 || beta >= 0 && beta <= 90 ) cuadrantes.add(1);
         if (alfa > 90 && alfa <= 180 || beta > 90 && beta <= 180 ) cuadrantes.add(2);
         if (alfa > 180 && alfa <= 270 || beta > 180 && beta <= 270 ) cuadrantes.add(3);
         if (alfa > 270 && alfa < 360 || beta > 270 && beta < 360 ) cuadrantes.add(4);
-
+        return cuadrantes;
     }
 
     public boolean in_cuadrante(float x, float y){
@@ -49,7 +49,7 @@ public class PIR_Detector extends Sensor{
     private int direction_angle;
     private int sensing_angle;
     private int sensing_range;
-    private ArrayList<Integer> cuadrantes;
+    private ArrayList<Integer> cuadrantes = new ArrayList<Integer>();
 
     private Circulo circulo;
     private final int id;
