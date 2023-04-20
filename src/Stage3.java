@@ -61,7 +61,7 @@ public class Stage3 {
 
         in.close();
 
-        central = new Central(doors, windows);
+        central = new Central(doors, windows, pirs);
         siren   = new Siren("src/" + sound_file);
 
         central.setSiren((siren));
@@ -98,6 +98,7 @@ public class Stage3 {
                 // Next step and check zone
                 if(central.getState()){
                     boolean status = central.checkZone();
+                    System.out.println(status);
                     if(!status){
                         sirenShouldSound = true;
                     }else{
@@ -148,19 +149,17 @@ public class Stage3 {
                 case "c" -> {
                     float x = Float.parseFloat(matcher.group(3).split(" ")[0]);
                     float y = Float.parseFloat(matcher.group(3).split(" ")[1]);
-                    System.out.println(x);
-                    System.out.println(y);
                     people.add(new Person(x, y));
+                    central.setPeople(people);
                 }
                 case "p" -> {
                     people.get(Integer.parseInt((matcher.group(2)))).move(matcher.group(3));
+                    central.setPeople(people);
                 }
                 case "D" -> {
                     System.out.println("[DEBUG] People");
-                    for (int i=0; i<people.size(); i++){
-                        System.out.println(people.get(i).getX());
-                        System.out.println(people.get(i).getY());
-                        System.out.println("\n");
+                    if(pirs.get(0).detectarPunto(-0.5f, -0.5f)){
+                        System.out.println("Detectada persona");
                     }
                 }
             }
