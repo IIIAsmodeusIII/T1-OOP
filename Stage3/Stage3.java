@@ -9,18 +9,20 @@ import java.io.IOException;
 public class Stage3 {
     private ArrayList<Door> doors;
     private ArrayList<Window> windows;
-    private ArrayList<PIR_Detector> PIRs;
+    private ArrayList<PIR_Detector> pirs;
+    private ArrayList<Person> people;
     private Central central;
     private Siren siren;
     // Pattern Regex
     Pattern pattern;
     Matcher matcher;
     public Stage3() {
-        doors = new ArrayList<>();
+        doors   = new ArrayList<>();
         windows = new ArrayList<>();
-        PIRs = new ArrayList<>();
+        pirs    = new ArrayList<>();
+        people  = new ArrayList<>();
 
-        pattern = Pattern.compile("([kdwcp])(\\d?)\\s(.*)");
+        pattern = Pattern.compile("([kdwcpD])(\\d?)\\s(.*)");
     }
     public void readConfiguration(Scanner in){
 
@@ -43,8 +45,8 @@ public class Stage3 {
             angle           = in.nextInt();
             sensingAngle    = in.nextInt();
             sensingDistance = in.nextInt();
-            
-            PIRs.add(new PIR_Detector(x, y, angle, sensingAngle, sensingDistance));
+
+            pirs.add(new PIR_Detector(x, y, angle, sensingAngle, sensingDistance));
         }
 
         // Sound file
@@ -59,8 +61,8 @@ public class Stage3 {
 
         in.close();
 
-        central = new Central(doors, windows);
-        siren   = new Siren("../src/" + sound_file);
+        central = new Central(doors, windows, pirs);
+        siren   = new Siren(sound_file);
 
         central.setSiren((siren));
     }
@@ -96,6 +98,7 @@ public class Stage3 {
                 // Next step and check zone
                 if(central.getState()){
                     boolean status = central.checkZone();
+                    System.out.println(status);
                     if(!status){
                         sirenShouldSound = true;
                     }else{
@@ -142,6 +145,22 @@ public class Stage3 {
                 }
                 case "k" -> {
                     central.arm(matcher.group(3));
+                }
+                case "c" -> {
+                    float x = Float.parseFloat(matcher.group(3).split(" ")[0]);
+                    float y = Float.parseFloat(matcher.group(3).split(" ")[1]);
+                    people.add(new Person(x, y));
+                    central.setPeople(people);
+                }
+                case "p" -> {
+                    people.get(Integer.parseInt((matcher.group(2)))).move(matcher.group(3));
+                    central.setPeople(people);
+                }
+                case "D" -> {
+                    System.out.println("[DEBUG] People");
+                    if(pirs.get(0).detectarPunto(-0.5f, -0.5f)){
+                        System.out.println("Detectada persona");
+                    }
                 }
             }
         }else{
@@ -202,7 +221,7 @@ public class Stage3 {
     }
     public static void main(String [] args) throws IOException {
 
-        Scanner in = new Scanner(new File("config/config.txt"));
+        Scanner in = new Scanner(new File(args[0]));
         //System.out.println("File: " + args[0]);
 
         Stage3 stage = new Stage3();
